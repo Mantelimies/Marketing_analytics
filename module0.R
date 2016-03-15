@@ -27,10 +27,12 @@ head(data)
 summary(data)
 
 # Explore the data using simple SQL statements
+#joonan lisä, installoi paketti
+install.packages("sqldf")
 library(sqldf)
 
 # Number of purchases per year
-x = sqldf("SELECT year_of_purchase, COUNT(year_of_purchase) AS 'counter' FROM data GROUP BY 1 ORDER BY 1")
+x = sqldf("SELECT year_of_purchase, COUNT(year_of_purchase) AS 'counter' FROM data GROUP BY year_of_purchase ORDER BY 1")
 barplot(x$counter, names.arg = x$year_of_purchase)
 
 # Average purchase amount per year
@@ -42,9 +44,5 @@ x = sqldf("SELECT year_of_purchase, SUM(purchase_amount) AS 'sum_amount' FROM da
 barplot(x$sum_amount, names.arg = x$year_of_purchase)
 
 # All in one
-x = sqldf("SELECT year_of_purchase,
-                  COUNT(year_of_purchase) AS 'counter',
-                  AVG(purchase_amount) AS 'avg_amount',
-                  SUM(purchase_amount) AS 'sum_amount'
-           FROM data GROUP BY 1 ORDER BY 1")
+
 print(x)
