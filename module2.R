@@ -8,7 +8,8 @@
 
 # --- COMPUTING RECENCY, FREQUENCY, MONETARY VALUE ---------
 
-
+#joonan lisä
+rm(list = ls(all = T))
 # Load text file into local variable called 'data'
 data = read.delim(file = 'purchases.txt', header = FALSE, sep = '\t', dec = '.')
 
@@ -64,6 +65,8 @@ aggregate(x = customers_2015[, 2:5], by = list(customers_2015$segment), mean)
 # Simple 2-segment solution using the which statement
 customers_2015$segment = "NA"
 customers_2015$segment[which(customers_2015$recency > 365*3)] = "inactive"
+
+
 table(customers_2015$segment)
 aggregate(x = customers_2015[, 2:5], by = list(customers_2015$segment), mean)
 
